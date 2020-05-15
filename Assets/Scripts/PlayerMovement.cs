@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public int force = 370;
     public int isGrounded;
 
-    int score = 0;
+    int score = 00;
     int onionQuantity = 0;
     int chickenQuantity = 0;
 
@@ -70,17 +70,21 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = 1;
         }
 
-        if(collision.gameObject.tag == "onion")
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "onion")
         {
-            score--;
+            score -= 3;
             onionQuantity++;
             scoreText.text = score.ToString();
             onionText.text = onionQuantity.ToString();
         }
 
-        if (collision.gameObject.tag == "chicken")
+        if (collision.tag == "chicken")
         {
-            score++;
+            score += 5;
             chickenQuantity++;
             scoreText.text = score.ToString();
             chickenText.text = chickenQuantity.ToString();

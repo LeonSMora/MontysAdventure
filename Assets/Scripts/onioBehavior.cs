@@ -22,13 +22,14 @@ public class onioBehavior : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.collider.tag == "Player")
+        if (collision.tag == "Player")
         {
             gameObject.SetActive(false);
             psPosition.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
             ps.Play();
         }
     }
+
 }
