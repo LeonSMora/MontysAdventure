@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class WaterBehavior : MonoBehaviour
 {
+    AudioSource audio;
+    public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +16,21 @@ public class WaterBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        audio = GameObject.Find("watah").GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            SceneManager.LoadScene("LoseScene");
+            rb.gravityScale = 0;
+            audio.Play();
+            Invoke("changeSceneTo", 0.3f);
         }
+    }
+
+    public void changeSceneTo()
+    {
+        SceneManager.LoadScene("LoseScene");
     }
 }

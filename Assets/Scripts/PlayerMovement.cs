@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public int force = 370;
     public int isGrounded;
 
-    int score = 00;
+    int score = 1;
     int onionQuantity = 0;
     int chickenQuantity = 0;
+    int firstChicken = 1;
 
     public Rigidbody2D rb;
     public SpriteRenderer spr;
@@ -19,11 +21,13 @@ public class PlayerMovement : MonoBehaviour
     public Text scoreText;
     public Text onionText;
     public Text chickenText;
+    AudioSource audio;
     
     // Start is called before the first frame update
     void Start()
     {
-        isGrounded = 0;   
+        isGrounded = 0;
+        audio = GameObject.Find("watah").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -61,6 +65,11 @@ public class PlayerMovement : MonoBehaviour
         
         }
 
+        if (score <= 0)
+        {
+            audio.Play();
+            Invoke("changeSceneTo", 0.2f);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -84,10 +93,28 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.tag == "chicken")
         {
-            score += 5;
-            chickenQuantity++;
-            scoreText.text = score.ToString();
-            chickenText.text = chickenQuantity.ToString();
+            if(firstChicken == 1)
+            {
+                score += 5;
+                score--;
+                firstChicken = 0;
+                chickenQuantity++;
+                scoreText.text = score.ToString();
+                chickenText.text = chickenQuantity.ToString();
+            }
+            else
+            {
+                score += 5;
+                chickenQuantity++;
+                scoreText.text = score.ToString();
+                chickenText.text = chickenQuantity.ToString();
+            }
+            
         }
+    }
+
+    public void changeSceneTo()
+    {
+        SceneManager.LoadScene("LoseScene");
     }
 }

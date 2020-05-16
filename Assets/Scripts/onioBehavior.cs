@@ -7,12 +7,14 @@ public class onioBehavior : MonoBehaviour
 
     Transform psPosition;
     ParticleSystem ps;
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
         ps = GameObject.Find("onionParticles").GetComponent<ParticleSystem>();
         psPosition = GameObject.Find("onionParticles").GetComponent<Transform>();
+        audio = GameObject.Find("onionAudio").GetComponent<AudioSource>();
 
     }
 
@@ -26,6 +28,7 @@ public class onioBehavior : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            audio.Play();
             gameObject.SetActive(false);
             psPosition.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
             ps.Play();

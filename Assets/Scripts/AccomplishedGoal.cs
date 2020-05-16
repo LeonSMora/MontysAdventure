@@ -7,11 +7,13 @@ public class AccomplishedGoal : MonoBehaviour
 {
 
     ParticleSystem ps;
+    AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
     {
         ps = GameObject.Find("LoveParticles").GetComponent<ParticleSystem>();
+        audio = GameObject.Find("Finish").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class AccomplishedGoal : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
+            audio.Play();
             ps.Play();
             Invoke("changeSceneTo", 1);
         }
