@@ -192,7 +192,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "!JUGAR\xA1"
+  m_Text: "\xA1JUGAR!"
 --- !u!114 &51955075581860583
 MonoBehaviour:
   m_ObjectHideFlags: 0
