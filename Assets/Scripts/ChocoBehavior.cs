@@ -7,7 +7,7 @@ public class ChocoBehavior : MonoBehaviour
 {
     public float speed = 2.5f;
     Rigidbody2D rb;
-    float posInicial;
+    public float posInicial;
     float posActual;
     int cambio = 1;
     ParticleSystem ps;
